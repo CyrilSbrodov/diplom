@@ -16,9 +16,6 @@ func main() {
 	incident := internal.IncidentSystem()
 	result := internal.GetResultData(sms, mms, email, voiceCall, billing, support, incident)
 
-	server := server.NewApp()
-	server.Run(result)
-
 	fmt.Println("SMS:")
 	fmt.Println(internal.ResultS.SMS)
 	fmt.Println("MMS:")
@@ -33,4 +30,7 @@ func main() {
 	fmt.Println(internal.ResultS.Incidents)
 	fmt.Println("Support:")
 	fmt.Println(internal.ResultS.Support)
+
+	srv := server.NewApp()
+	srv.Run(result)
 }
