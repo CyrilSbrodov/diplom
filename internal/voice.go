@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -66,12 +67,12 @@ func VoiceSystem() []VoiceCallData {
 			dataVoice = append(dataVoice, voice)
 		}
 	}
-	//fmt.Println("=================")
-	//fmt.Println("Состояние системы Voice:")
-	//
-	//for i := 0; i < len(dataVoice); i++ {
-	//	fmt.Println(dataVoice[i])
-	//}
+	fmt.Println("=================")
+	fmt.Println("Состояние системы Voice:")
+
+	for i := 0; i < len(dataVoice); i++ {
+		fmt.Println(dataVoice[i])
+	}
 	return dataVoice
 }
 

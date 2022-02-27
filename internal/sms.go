@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"sort"
@@ -53,6 +54,12 @@ func SMSSystem() []SMSData {
 			sms.ResponseTime = res[2]
 			dataSMS = append(dataSMS, sms)
 		}
+	}
+	fmt.Println("=================")
+	fmt.Println("Состояние системы SMS:")
+
+	for i := 0; i < len(dataSMS); i++ {
+		fmt.Println(dataSMS[i])
 	}
 
 	return dataSMS

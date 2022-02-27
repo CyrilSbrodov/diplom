@@ -50,12 +50,12 @@ func MMSSystem() []MMSData {
 				dataMMS = dataMMS[:len(dataMMS)-1]
 			}
 		}
-		//fmt.Println("=================")
-		//fmt.Println("Состояние системы MMS:")
-		//
-		//for i := 0; i < len(dataMMS); i++ {
-		//	fmt.Println(dataMMS[i])
-		//}
+		fmt.Println("=================")
+		fmt.Println("Состояние системы MMS:")
+
+		for i := 0; i < len(dataMMS); i++ {
+			fmt.Println(dataMMS[i])
+		}
 
 	} else if resp.StatusCode == 500 {
 		fmt.Println("Ошибка", dataMMS)

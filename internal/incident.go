@@ -35,12 +35,12 @@ func IncidentSystem() []IncidentData {
 			log.Fatal(err)
 		}
 
-		//fmt.Println("=================")
-		//fmt.Println("Состояние системы Incident:")
-		//
-		//for i := 0; i < len(dataIncident); i++ {
-		//	fmt.Println(dataIncident[i])
-		//}
+		fmt.Println("=================")
+		fmt.Println("Состояние системы Incident:")
+
+		for i := 0; i < len(dataIncident); i++ {
+			fmt.Println(dataIncident[i])
+		}
 	} else if resp.StatusCode == 500 {
 		fmt.Println("Ошибка", dataIncident)
 	}

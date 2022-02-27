@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"io/ioutil"
 	"math"
 	"os"
@@ -50,18 +51,18 @@ func BillingSystem() BillingData {
 	billing.FraudControl = result[4] == 49
 	billing.CheckoutPage = result[5] == 49
 
-	//fmt.Println("=================")
-	//fmt.Println("Состояние системы Billing:")
-	//fmt.Println("billing в десятичном формате:")
-	//fmt.Println(res)
-	//fmt.Println("=================")
-	//fmt.Println("Состояние системы Billing:")
-	//fmt.Println("Create Customer:", billing.CreateCustomer)
-	//fmt.Println("Purchase:", billing.Purchase)
-	//fmt.Println("Payout:", billing.Payout)
-	//fmt.Println("Recurring:", billing.Recurring)
-	//fmt.Println("Fraud Control:", billing.FraudControl)
-	//fmt.Println("Checkout Page:", billing.CheckoutPage)
+	fmt.Println("=================")
+	fmt.Println("Состояние системы Billing:")
+	fmt.Println("billing в десятичном формате:")
+	fmt.Println(res)
+	fmt.Println("=================")
+	fmt.Println("Состояние системы Billing:")
+	fmt.Println("Create Customer:", billing.CreateCustomer)
+	fmt.Println("Purchase:", billing.Purchase)
+	fmt.Println("Payout:", billing.Payout)
+	fmt.Println("Recurring:", billing.Recurring)
+	fmt.Println("Fraud Control:", billing.FraudControl)
+	fmt.Println("Checkout Page:", billing.CheckoutPage)
 
 	return billing
 }

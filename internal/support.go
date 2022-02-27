@@ -34,12 +34,12 @@ func SupportSystem() []SupportData {
 			log.Fatal(err)
 		}
 
-		//fmt.Println("=================")
-		//fmt.Println("Состояние системы Support:")
-		//
-		//for i := 0; i < len(dataSupport); i++ {
-		//	fmt.Println(dataSupport[i])
-		//}
+		fmt.Println("=================")
+		fmt.Println("Состояние системы Support:")
+
+		for i := 0; i < len(dataSupport); i++ {
+			fmt.Println(dataSupport[i])
+		}
 
 	} else if resp.StatusCode == 500 {
 		fmt.Println("Ошибка", dataSupport)

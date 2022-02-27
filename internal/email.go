@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"sort"
@@ -52,12 +53,12 @@ func EmailSystem() []EmailData {
 			dataEmail = append(dataEmail, email)
 		}
 	}
-	//fmt.Println("=================")
-	//fmt.Println("Состояние системы Email:")
-	//
-	//for i := 0; i < len(dataEmail); i++ {
-	//	fmt.Println(dataEmail[i])
-	//}
+	fmt.Println("=================")
+	fmt.Println("Состояние системы Email:")
+
+	for i := 0; i < len(dataEmail); i++ {
+		fmt.Println(dataEmail[i])
+	}
 	return dataEmail
 }
 
