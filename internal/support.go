@@ -64,25 +64,5 @@ func prepareSupport(dataSupport []SupportData) []int {
 		dataSupportArray = append(dataSupportArray, 3, supportTime)
 	}
 
-	//b := make([][]int, len(dataSupport))
-	//for i := 0; i < len(dataSupport); i++ {
-	//	b[i] = make([]int, 2)
-	//	for j := 0; j < 2; j++ {
-	//		if j == 0 {
-	//			if dataSupport[i].ActiveTickets < 9 {
-	//				b[i][j] = 1
-	//			} else if dataSupport[i].ActiveTickets >= 9 && dataSupport[i].ActiveTickets < 16 {
-	//				b[i][j] = 2
-	//			} else {
-	//				b[i][j] = 3
-	//			}
-	//		} else {
-	//			wait := 0
-	//			wait = 60 / 18 * dataSupport[i].ActiveTickets
-	//			b[i][j] = wait
-	//		}
-	//	}
-	//}
-	//fmt.Println(b)
 	return dataSupportArray
 }
