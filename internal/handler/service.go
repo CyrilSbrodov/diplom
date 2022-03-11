@@ -4,12 +4,12 @@ import "diplom/internal"
 
 type Service struct {
 	resultS internal.ResultSetT
-	//result  internal.ResultT
+	result  internal.ResultT
 }
 
 //
-func NewService(result internal.ResultSetT) *Service {
+func NewService(result internal.ResultT) *Service {
 	return &Service{
-		resultS: result,
+		result: result,
 	}
 }

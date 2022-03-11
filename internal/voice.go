@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -26,15 +27,15 @@ var (
 )
 
 func VoiceSystem() []VoiceCallData {
-	fileName := "simulator/skillbox-diploma/voice.data"
+	fileName := "simulator/voice.data"
 	file, err := os.Open(fileName)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось получить данные. ошибка: %v", err))
 	}
 	defer file.Close()
 	result, err := ioutil.ReadAll(file)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось прочитать данные. ошибка: %v", err))
 	}
 
 	resultString := strings.Split(string(result), "\n")
@@ -58,7 +59,7 @@ func VoiceSystem() []VoiceCallData {
 			voice.ResponseTime = res[2]
 			ConnectionStability, err := strconv.ParseFloat(res[4], 32)
 			if err != nil {
-				panic(err)
+				errors.New(fmt.Sprintf("ошибка конвертирования %v:", err))
 			}
 			voice.ConnectionStability = float32(ConnectionStability)
 			voice.TTFB = stringToInt(res[5])
@@ -79,7 +80,7 @@ func VoiceSystem() []VoiceCallData {
 func stringToInt(s string) int {
 	number, err := strconv.Atoi(s)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("%v не является числом, ошибка: %v:", s, err))
 	}
 	return number
 }

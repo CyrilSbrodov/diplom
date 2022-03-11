@@ -2,9 +2,9 @@ package internal
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
@@ -22,16 +22,16 @@ func SupportSystem() []SupportData {
 	resp, err := http.Get("http://127.0.0.1:8383/support")
 
 	if err != nil {
-		log.Fatal(err)
+		errors.New(fmt.Sprintf("не удалось получить данные. ошибка: %v", err))
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		errors.New(fmt.Sprintf("не удалось прочитать данные. ошибка: %v", err))
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == 200 {
 		if err := json.Unmarshal(body, &dataSupport); err != nil {
-			log.Fatal(err)
+			errors.New(fmt.Sprintf("не удалось прочитать данные. ошибка: %v", err))
 		}
 
 		fmt.Println("=================")

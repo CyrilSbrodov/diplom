@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -23,15 +24,15 @@ type SMSData struct {
 }
 
 func SMSSystem() []SMSData {
-	fileName := "simulator/skillbox-diploma/sms.data"
+	fileName := "simulator/sms.data"
 	file, err := os.Open(fileName)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось открыть файл. ошибка: %v", err))
 	}
 	defer file.Close()
 	result, err := ioutil.ReadAll(file)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось прочитать файл. ошибка: %v", err))
 	}
 	resultString := strings.Split(string(result), "\n")
 

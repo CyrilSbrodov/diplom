@@ -3,9 +3,9 @@ package internal
 import (
 	data2 "diplom/data"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"sort"
 )
@@ -27,16 +27,16 @@ func MMSSystem() []MMSData {
 	resp, err := http.Get("http://127.0.0.1:8383/mms")
 
 	if err != nil {
-		log.Fatal(err)
+		errors.New(fmt.Sprintf("не удалось получить данные. ошибка:", err))
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		errors.New(fmt.Sprintf("не удалось прочитать данные. ошибка:", err))
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == 200 {
 		if err := json.Unmarshal(body, &dataMMS); err != nil {
-			log.Fatal(err)
+			errors.New(fmt.Sprintf("не удалось прочитать данные. ошибка:", err))
 		}
 		for i := 0; i < len(dataMMS); i++ {
 			if _, exist := data2.Country[dataMMS[i].Country]; !exist {

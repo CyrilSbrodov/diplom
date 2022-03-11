@@ -21,7 +21,7 @@ func NewApp() *App {
 	return &App{}
 }
 
-func (a *App) Run(result internal.ResultSetT) {
+func (a *App) Run(result internal.ResultT) {
 
 	router := mux.NewRouter()
 	service := handler.NewService(result)

@@ -2,6 +2,7 @@ package internal
 
 import (
 	data2 "diplom/data"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -22,15 +23,15 @@ var (
 )
 
 func EmailSystem() []EmailData {
-	fileName := "simulator/skillbox-diploma/email.data"
+	fileName := "simulator/email.data"
 	file, err := os.Open(fileName)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось открыть файл. ошибка: %v", err))
 	}
 	defer file.Close()
 	result, err := ioutil.ReadAll(file)
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось прочитать файл. ошибка: %v", err))
 	}
 	resultString := strings.Split(string(result), "\n")
 
@@ -63,65 +64,58 @@ func EmailSystem() []EmailData {
 }
 
 func prepareEmail(email []EmailData) map[string][][]EmailData {
+	result := make(map[string][][]EmailData, 0)
 
-	data := make(map[string][][]EmailData)
+	countries := make(map[string]int)
+	for _, elem := range email {
+		countries[elem.Country]++
+	}
 
-	sort.Slice(email, func(i, j int) bool {
-		return email[i].Country < email[j].Country
+	for countryCode, _ := range countries {
+		var emailDataItem [][]EmailData
+		emailDataItem = append(emailDataItem, Get3Min(email, countryCode))
+		emailDataItem = append(emailDataItem, Get3Max(email, countryCode))
+
+		result[countryCode] = emailDataItem
+	}
+
+	return result
+}
+
+func Get3Min(data []EmailData, code string) []EmailData {
+	result := make([]EmailData, 0)
+	for _, elem := range data {
+		if elem.Country == code {
+			result = append(result, elem)
+		}
+	}
+
+	sort.SliceStable(result, func(i, j int) bool {
+		return result[i].DeliveryTime < result[j].DeliveryTime
 	})
 
-	for i := 0; i < len(email); i++ {
-		c := make([][]EmailData, 2)
-		for j := 0; j < len(email); j++ {
-			if email[i].Country == email[j].Country {
-				c[0] = append(c[0], email[j])
-				c[1] = append(c[1], email[j])
-				data[email[i].Country] = c
-			}
+	if len(result) < 3 {
+		return result
+	}
+
+	return result[:3]
+}
+
+func Get3Max(data []EmailData, code string) []EmailData {
+	result := make([]EmailData, 0)
+	for _, elem := range data {
+		if elem.Country == code {
+			result = append(result, elem)
 		}
 	}
 
-	for i := 0; i < len(email); i++ {
-		if email[i].DeliveryTime > data[email[i].Country][0][0].DeliveryTime {
-			data[email[i].Country][0][2] = data[email[i].Country][0][1]
-			data[email[i].Country][0][1] = data[email[i].Country][0][0]
-			data[email[i].Country][0][0] = email[i]
-		} else if email[i].DeliveryTime > data[email[i].Country][0][1].DeliveryTime && email[i].DeliveryTime < data[email[i].Country][0][0].DeliveryTime {
-			data[email[i].Country][0][2] = data[email[i].Country][0][1]
-			data[email[i].Country][0][1] = email[i]
-		} else if email[i].DeliveryTime > data[email[i].Country][0][2].DeliveryTime && email[i].DeliveryTime < data[email[i].Country][0][1].DeliveryTime {
-			data[email[i].Country][0][2] = email[i]
-		}
+	sort.SliceStable(result, func(i, j int) bool {
+		return result[i].DeliveryTime > result[j].DeliveryTime
+	})
+
+	if len(result) < 3 {
+		return result
 	}
 
-	for i := 0; i < len(email); i++ {
-		if email[i].DeliveryTime < data[email[i].Country][1][0].DeliveryTime {
-			data[email[i].Country][1][2] = data[email[i].Country][1][1]
-			data[email[i].Country][1][1] = data[email[i].Country][1][0]
-			data[email[i].Country][1][0] = email[i]
-		} else if email[i].DeliveryTime < data[email[i].Country][1][1].DeliveryTime && email[i].DeliveryTime > data[email[i].Country][1][0].DeliveryTime {
-			data[email[i].Country][1][2] = data[email[i].Country][1][1]
-			data[email[i].Country][1][1] = email[i]
-		} else if email[i].DeliveryTime < data[email[i].Country][1][2].DeliveryTime && email[i].DeliveryTime > data[email[i].Country][1][1].DeliveryTime {
-			data[email[i].Country][1][2] = email[i]
-		}
-	}
-
-	for i := 0; i < 3; i++ {
-		for j := 0; j < len(email); j++ {
-			if data[email[j].Country][0][i] == data[email[j].Country][0][i] {
-				data[email[j].Country][0] = data[email[j].Country][0][0:3]
-			}
-		}
-	}
-
-	for i := 0; i < 3; i++ {
-		for j := 0; j < len(email); j++ {
-			if data[email[j].Country][1][i] == data[email[j].Country][1][i] {
-				data[email[j].Country][1] = data[email[j].Country][1][0:3]
-			}
-		}
-	}
-
-	return data
+	return result[:3]
 }

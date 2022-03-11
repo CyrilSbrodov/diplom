@@ -3,6 +3,8 @@ package handler
 import (
 	"diplom/internal"
 	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -27,10 +29,12 @@ func (h *handler) Register(router *mux.Router) {
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 
-	resultJson, err := json.MarshalIndent(internal.ResultS, " ", " ")
+	resultJson, err := json.MarshalIndent(internal.Result, " ", " ")
 	if err != nil {
-		panic(err)
+		errors.New(fmt.Sprintf("не удалось перекодировать данные. ошибка: %v", err))
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.WriteHeader(http.StatusOK)
-	w.Write(resultJson)
+	_, _ = w.Write(resultJson)
 }
