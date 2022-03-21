@@ -24,7 +24,7 @@ var (
 )
 
 func MMSSystem() []MMSData {
-	resp, err := http.Get("http://127.0.0.1:8383/mms")
+	resp, err := http.Get("http://10.222.7.10:8383/mms")
 
 	if err != nil {
 		errors.New(fmt.Sprintf("не удалось получить данные. ошибка:", err))

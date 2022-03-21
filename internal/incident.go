@@ -20,7 +20,7 @@ var (
 )
 
 func IncidentSystem() []IncidentData {
-	resp, err := http.Get("http://127.0.0.1:8383/accendent")
+	resp, err := http.Get("http://10.222.7.10:8383/accendent")
 
 	if err != nil {
 		errors.New(fmt.Sprintf("не удалось получить данные. ошибка: %v", err))

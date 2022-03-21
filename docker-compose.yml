@@ -1,0 +1,38 @@
+
+version: "3"
+
+services:
+  simulator:
+    image: sim
+    #build: simulator/
+    volumes:
+      - C:\Users\sbran\GolandProjects\diplom\simulator:/app
+    #network_mode: bridge
+    ports:
+      - "8383:8383"
+    networks:
+      ch_ntw:
+        ipv4_address: 10.222.7.10
+  servers:
+    image: app
+    #build: /
+    #links:
+     #- simulator
+    volumes:
+      - C:\Users\sbran\GolandProjects\diplom:/apps
+    ports:
+      - "8282:8282"
+    #network_mode: host
+    depends_on:
+      - simulator
+    networks:
+      ch_ntw:
+        ipv4_address: 10.222.7.11
+
+networks:
+  ch_ntw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.222.7.0/24
+

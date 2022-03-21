@@ -42,7 +42,7 @@ func (a *App) Run(result internal.ResultT) {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
-	log.Println("server is listen on port 8282")
+	log.Println("server is listen on port", a.server.Addr)
 
 	<-done
 
