@@ -1,9 +1,9 @@
 #### Оглавление:
 ____
-0. [Дипломный проект](https://github.com/CyrilSbrodov/diplom/edit/master/README.md#дипломный-проект).
-1. [Системы](https://github.com/CyrilSbrodov/diplom/edit/master/README.md#системы).
-2. [Сбор данных](https://github.com/CyrilSbrodov/diplom/edit/master/README.md#сбор-данных).
-3. [Отчет о состоянии систем](https://github.com/CyrilSbrodov/diplom/edit/master/README.md#отчет-о-состоянии-систем).
+0. [Дипломный проект](https://github.com/CyrilSbrodov/diplom#дипломный-проект).
+1. [Системы](https://github.com/CyrilSbrodov/diplom/#системы).
+2. [Сбор данных](https://github.com/CyrilSbrodov/diplom/#сбор-данных).
+3. [Отчет о состоянии систем](https://github.com/CyrilSbrodov/diplom/#отчет-о-состоянии-систем).
 ____
 
 ## Дипломный проект
